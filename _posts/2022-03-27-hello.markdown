@@ -1,0 +1,29 @@
+---
+layout: post
+title:  "Hello"
+date:   2022-03-27 17:56:06 +0300
+categories: init
+---
+
+Hello world.
+
+[Github Profile][ref-pointer]
+
+{% highlight scala %}
+def foo(s: String): Unit =
+  println(s)
+{% endhighlight %}
+
+{% highlight cpp %}
+#include <iostream>
+
+int main() {
+  std::cout << "s";
+  return 0;
+}
+{% endhighlight %}
+
+
+The `big` brown fox
+
+[ref-pointer]: https://github.com/alexyavo
