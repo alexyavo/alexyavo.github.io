@@ -20,6 +20,7 @@
 
 title: Daemon Meridianus
 description: >- # this means to ignore newlines until "baseurl:"
+  Logical validity is not a guarantee of truth
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  alexyavo
