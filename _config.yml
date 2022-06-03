@@ -30,6 +30,9 @@ theme: minima
 plugins:
   - jekyll-feed
 
+kramdown:
+  hard_wrap: true # interpert line breaks literally (before a\nb would be translated to "a b" in HTML)
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to

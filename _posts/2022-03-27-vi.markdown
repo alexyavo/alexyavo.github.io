@@ -1,0 +1,208 @@
+---
+layout: post
+title:  "VI"
+date:   2022-03-27 17:56:06 +0300
+categories: text
+---
+
+`.` repeat last command
+`C-g` show status
+
+`ZZ` save & exit
+`ZQ` exit without saving
+
+`q:` command history
+`q/` search history
+
+`:display` show registers
+
+# Text Editing
+`i` insert before cursor
+`a` insert after cursor
+
+`A` insert @ end of line
+`I` insert @ start of line
+
+`o` begin a new line below the cursor and insert text
+`O` same, above cursor
+
+`C-r` redo
+`u` undo
+
+`C-v` block visual mode
+`V` line visual mode
+(when in visual mode, `I` for insert-mode, then ESC to apply inserts across all lines.)
+
+`V{line_no}G` select lines upto `{line_no}`
+
+`y` yank selection
+`yy` yank current line including newline
+`{n}yy` yank `{n}` lines
+`:%y` yank entire file
+`yyp` duplicate line and paste below
+
+`+y` yank to clipboard
+`gg"+yG` - copy entire file to clipboar (`+` is clipboard buffer)
+
+`p` paste yanked / deleted content
+`P` paste before cusror
+
+`x` delete character
+
+`dvb` delete word backwords (`v` toggles inclusivity, `:help inclusive` for details)
+`de` delete word forwards
+`d$` delete to end of line
+`dd` delete line
+`3dd` delete 3 lines
+`dG` delete from here to end of file
+
+`di"` delete inside double quotes
+`dit` delete inside html tag
+`dat` delete outer html tag
+`dib` delete a block surrounded by (
+`diB` delete a block surrrouned by {
+`das` delete a sentence
+`dap` delete a paragraph
+
+`cc` delete current line and start insert mode
+`s` delete char under cursor and start insert mode
+
+`C-w` (in insert mode) delete last word
+
+`ggdG` delete everything
+
+`:r filename` insert content of filename
+`23:r filename` insert after line 23
+
+`rx` replace char under cursor with x
+
+`ce` "change" motion: will delete the next word and put you in insert mode
+(also, `c$` etc)
+
+`>` - indent
+`V` (visual mode) -> `>` - indent block
+
+`> i B` - indent curly block (from anywhere in the block)
+`> %` - indent curly block, cursor on one of braces
+`:4,8>` - indent lines 4 to 8, inclusive
+`set shiftwidth=4` - set width
+
+## Find Replace
+`https://vim.fandom.com/wiki/Search_and_replace`
+
+`:s/foo/bar/g` replace foo w/ bar in current line
+`:%s/foo/bar/g` replace ... in all lines
+`:%s/foo/bar/gc` replace in all lines + ask for confirmation
+`:%s/\<foo\>/bar/gc` whole words + confirm
+`:%s/foo/bar/gci` case insensitive + confirm
+
+## delete all lines from current to marked one
+goto starting line and type `ma` (mark a)
+then goto last line and `d'a` (delete to mark a)
+
+# Windows / Buffers
+`C-w v` vertical split
+`C-w s` horizontal split
+
+`C-w w` next window (?)
+`C-w o` close other windows / keep active window only 
+`C-w c` close current window (keep buffer open)
+
+`C-w r` move current window to the right
+`C-w =` make all splits equal size
+
+`:ls` list buffers
+`:b1` goto buffer #1
+`:bn` next buffer
+`:bd` delete buffer
+`:bw` wipe buffer (difference from `:bdelete` ?)
+
+`:enew` create empty buffer
+`:new` or `C-w n` new window & buffer in horizontal split
+`:vnew` same as `:new` but vertical split
+
+`:file <name>` name buffer
+`:0f` clear buffer name
+
+`:q` close window + buffer (?)
+
+`:vertical sball` open all buffers in vertical split
+
+# Tabs
+`:Tex` open new tab and open fs browser
+`:tabnew <filepath>` 
+
+`gt` next tab
+`gT` prev tab
+`2gt` switch to tab #2
+
+`:tabl` last tab
+`:tabclose` 
+
+# Text Navigation
+`:help mark-motions` 
+`:help jump-motions`
+
+`:set relativenumber` relative line numbers 
+
+`5j` jump 5 lines down
+`5k` jump 5 lines up
+
+`:42` goto line 42 (absolute)
+`42gg`
+
+`zz` move current line to middle of screen
+`zt` move current line to top of screen
+`zb` move current line to bottom of screen
+
+`C-y` move screen up one line
+`C-e` move screen down one line
+`C-u` move cursor & screen up 1/2 page
+`C-d` move cursor & screen down 1/2 page
+`C-b` move screen up one page, cursor to last line
+`C-f` move screen down one page, cursor to first line
+
+`0` goto the starting of the current line.
+`^` goto the first non blank character of the line.
+`$` goto the end of the current line.
+
+`''` goto last location (start of line)
+\`\` goto last location 
+
+`mk` mark current position as k (can be any letter)
+\`k return to position "k"
+
+`H` goto the first line of current screen.
+`L` goto the last line of current screen.
+
+`e` end of word
+`b` prev word
+`w` next word
+(also: E, B, W)
+
+`{` start of paragraph
+`}` end of paragraph
+
+`gg` start of file
+`G` end of file
+
+`f{char}` jump to next occurrence of {char} in line
+`F{char}` jump to prev ...
+
+`/txt` search for next occurance
+`?txt` search for prev occurance
+
+`*` goto next occurance of word under cursor
+`#` goto prev occurance of word under cursor 
+
+`%` goto matching parens
+
+# Filesystem Navigation 
+`:e file` open file
+`:n file1 file2` multiple files 
+`:Ex ~` browse a dir to open file from
+`:E` browse
+`:Sex` horizontal split
+`:Vex` vertical split
+`:Tex` new tab + browse
+
