@@ -17,6 +17,8 @@ categories: text
 `:display` show registers
 `:pwd`
 
+`:set list` / `:set nolist` show/hide whitespace
+
 # Text Editing
 `i` insert before cursor
 `a` insert after cursor
@@ -106,7 +108,7 @@ then goto last line and `d'a` (delete to mark a)
 `C-w s` horizontal split
 
 `C-w w` next window (?)
-`C-w o` close other windows / keep active window only 
+`C-w o` close other windows / keep active window only
 `C-w c` close current window (keep buffer open)
 
 `C-w r` move current window to the right
@@ -134,20 +136,20 @@ then goto last line and `d'a` (delete to mark a)
 
 # Tabs
 `:Tex` open new tab and open fs browser
-`:tabnew <filepath>` 
+`:tabnew <filepath>`
 
 `gt` next tab
 `gT` prev tab
 `2gt` switch to tab #2
 
 `:tabl` last tab
-`:tabclose` 
+`:tabclose`
 
 # Text Navigation
-`:help mark-motions` 
+`:help mark-motions`
 `:help jump-motions`
 
-`:set relativenumber` relative line numbers 
+`:set relativenumber` relative line numbers
 
 `5j` jump 5 lines down
 `5k` jump 5 lines up
@@ -171,7 +173,7 @@ then goto last line and `d'a` (delete to mark a)
 `$` goto the end of the current line.
 
 `''` goto last location (start of line)
-\`\` goto last location 
+\`\` goto last location
 
 `mk` mark current position as k (can be any letter)
 \`k return to position "k"
@@ -194,7 +196,7 @@ then goto last line and `d'a` (delete to mark a)
 `F{char}` jump to prev ...
 
 `*` goto next occurance of word under cursor
-`#` goto prev occurance of word under cursor 
+`#` goto prev occurance of word under cursor
 
 `%` goto matching parens
 
@@ -207,9 +209,9 @@ then goto last line and `d'a` (delete to mark a)
 `:set nohlsearch` turn off the previous option completely
 `:noh` turn off search highlight until next search
 
-# Filesystem Navigation 
+# Filesystem Navigation
 `:e file` open file
-`:n file1 file2` multiple files 
+`:n file1 file2` multiple files
 `:Ex ~` browse a dir to open file from
 `:E` browse
 `:Sex` horizontal split
@@ -217,9 +219,19 @@ then goto last line and `d'a` (delete to mark a)
 `:Tex` new tab + browse
 
 # Config
+{% highlight vim %}
+syntax on
+set showmatch
+set ruler
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
+set ai
+set relativenumber
+set path=$PWD/**
+{% endhighlight %}
+
 `tabstop` `ts` The width of a hard tabstop measured in "spaces" -- effectively the (maximum) width of an actual tab character.
 
-`shiftwidth` `sw` The size of an "indent". It's also measured in spaces, so if your code base indents with tab characters then you want shiftwidth to equal the number of tab characters times tabstop. This is also used by things like the =, > and < commands. 
+`shiftwidth` `sw` The size of an "indent". It's also measured in spaces, so if your code base indents with tab characters then you want shiftwidth to equal the number of tab characters times tabstop. This is also used by things like the =, > and < commands.
 
 `softtabstop` `sts` Setting this to a non-zero value other than tabstop will make the tab key (in insert mode) insert a combination of spaces (and possibly tabs) to simulate tab stops at this width.
 
