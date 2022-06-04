@@ -91,7 +91,7 @@ categories: text
 `set shiftwidth=4` set width
 
 ## Find Replace
-`https://vim.fandom.com/wiki/Search_and_replace`
+[https://vim.fandom.com/wiki/Search_and_replace](https://vim.fandom.com/wiki/Search_and_replace)
 
 `:s/foo/bar/g` replace foo w/ bar in current line
 `:%s/foo/bar/g` replace ... in all lines
@@ -217,6 +217,15 @@ then goto last line and `d'a` (delete to mark a)
 `:Sex` horizontal split
 `:Vex` vertical split
 `:Tex` new tab + browse
+
+# evil
+{% highlight emacs-lisp %}
+(use-package evil :ensure t
+  :init (setq evil-want-C-u-scroll t)
+  :config (evil-mode t))
+{% endhighlight %}
+
+add to `~/.tmux.conf`: `set -s escape-time 0` [why?](https://evil.readthedocs.io/en/latest/faq.html#problems-with-the-escape-key-in-the-terminal)
 
 # Config
 {% highlight vim %}
