@@ -15,6 +15,7 @@ categories: text
 `q/` search history
 
 `:display` show registers
+`:pwd`
 
 # Text Editing
 `i` insert before cursor
@@ -79,13 +80,13 @@ categories: text
 `ce` "change" motion: will delete the next word and put you in insert mode
 (also, `c$` etc)
 
-`>` - indent
-`V` (visual mode) -> `>` - indent block
+`>` indent
+`V` (visual mode) -> `>` indent block
 
-`> i B` - indent curly block (from anywhere in the block)
-`> %` - indent curly block, cursor on one of braces
-`:4,8>` - indent lines 4 to 8, inclusive
-`set shiftwidth=4` - set width
+`> i B` indent curly block (from anywhere in the block)
+`> %` indent curly block, cursor on one of braces
+`:4,8>` indent lines 4 to 8, inclusive
+`set shiftwidth=4` set width
 
 ## Find Replace
 `https://vim.fandom.com/wiki/Search_and_replace`
@@ -110,6 +111,9 @@ then goto last line and `d'a` (delete to mark a)
 
 `C-w r` move current window to the right
 `C-w =` make all splits equal size
+
+`C-w -/+` resize height (`{n}C-w -`)
+`C-w >/<` resize width
 
 `:ls` list buffers
 `:b1` goto buffer #1
@@ -189,13 +193,19 @@ then goto last line and `d'a` (delete to mark a)
 `f{char}` jump to next occurrence of {char} in line
 `F{char}` jump to prev ...
 
-`/txt` search for next occurance
-`?txt` search for prev occurance
-
 `*` goto next occurance of word under cursor
 `#` goto prev occurance of word under cursor 
 
 `%` goto matching parens
+
+`set path=$PWD/**` and then `:find filename` (+tab completion)
+
+`/txt` search for next occurance
+`?txt` search for prev occurance
+
+`:hls` highlight all search matches
+`:set nohlsearch` turn off the previous option completely
+`:noh` turn off search highlight until next search
 
 # Filesystem Navigation 
 `:e file` open file
@@ -206,3 +216,13 @@ then goto last line and `d'a` (delete to mark a)
 `:Vex` vertical split
 `:Tex` new tab + browse
 
+# Config
+`tabstop` `ts` The width of a hard tabstop measured in "spaces" -- effectively the (maximum) width of an actual tab character.
+
+`shiftwidth` `sw` The size of an "indent". It's also measured in spaces, so if your code base indents with tab characters then you want shiftwidth to equal the number of tab characters times tabstop. This is also used by things like the =, > and < commands. 
+
+`softtabstop` `sts` Setting this to a non-zero value other than tabstop will make the tab key (in insert mode) insert a combination of spaces (and possibly tabs) to simulate tab stops at this width.
+
+`expandtab` `et` Enabling this will make the tab key (in insert mode) insert spaces instead of tab characters. This also affects the behavior of the retab command.
+
+`smarttab` Enabling this will make the tab key (in insert mode) insert spaces or tabs to go to the next indent of the next tabstop when the cursor is at the beginning of a line (i.e. the only preceding characters are whitespace).
