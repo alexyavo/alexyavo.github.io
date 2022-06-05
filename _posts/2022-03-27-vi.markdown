@@ -38,12 +38,13 @@ categories: text
 
 `V{line_no}G` select lines upto `{line_no}`
 
+`=` re-indent
+`gqq` wrap line (control w/ `:set tw=80`)
+
 `y` yank selection
 `yy` yank current line including newline
 `{n}yy` yank `{n}` lines
 `:%y` yank entire file
-`yyp` duplicate line and paste below
-
 `+y` yank to clipboard
 `gg"+yG` - copy entire file to clipboar (`+` is clipboard buffer)
 
@@ -56,9 +57,10 @@ categories: text
 `de` delete word forwards
 `d$` delete to end of line
 `dd` delete line
-`3dd` delete 3 lines
+`{n}dd` delete `n` lines
 `dG` delete from here to end of file
 
+`daw` delete word under cursor
 `di"` delete inside double quotes
 `dit` delete inside html tag
 `dat` delete outer html tag
@@ -67,28 +69,34 @@ categories: text
 `das` delete a sentence
 `dap` delete a paragraph
 
+`ggdG` delete everything
+
 `cc` delete current line and start insert mode
 `s` delete char under cursor and start insert mode
 
-`C-w` (in insert mode) delete last word
+`ce` "change" motion: will delete the next word and put you in insert mode
+(also, `c$` etc)
 
-`ggdG` delete everything
+`cc`, `dd`, `yy` apply to current line
+
+`C-w` (in insert mode) delete last word
 
 `:r filename` insert content of filename
 `23:r filename` insert after line 23
 
 `rx` replace char under cursor with x
 
-`ce` "change" motion: will delete the next word and put you in insert mode
-(also, `c$` etc)
-
 `>` indent
 `V` (visual mode) -> `>` indent block
 
-`> i B` indent curly block (from anywhere in the block)
-`> %` indent curly block, cursor on one of braces
+`>iB` indent curly block (from anywhere in the block)
+`>%` indent curly block, cursor on one of braces
+
+`=iB` format curly block
+`=%` format block, put cursor on one of braces
+
 `:4,8>` indent lines 4 to 8, inclusive
-`set shiftwidth=4` set width
+`set sw=4` setwidth
 
 ## Find Replace
 [https://vim.fandom.com/wiki/Search_and_replace](https://vim.fandom.com/wiki/Search_and_replace)
@@ -140,7 +148,10 @@ then goto last line and `d'a` (delete to mark a)
 
 `gt` next tab
 `gT` prev tab
-`2gt` switch to tab #2
+`{n}gt` switch to tab `n`
+
+`gd` jump to local definition
+`C-]` jump to tag
 
 `:tabl` last tab
 `:tabclose`
