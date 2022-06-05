@@ -43,7 +43,7 @@ categories: text
 
 `y` yank selection
 `yy` yank current line including newline
-`{n}yy` yank `{n}` lines
+`{n}yy` yank `n` lines
 `:%y` yank entire file
 `+y` yank to clipboard
 `gg"+yG` - copy entire file to clipboar (`+` is clipboard buffer)
