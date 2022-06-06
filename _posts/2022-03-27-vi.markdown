@@ -59,6 +59,9 @@ categories: text
 `dd` delete line
 `{n}dd` delete `n` lines
 `dG` delete from here to end of file
+`d{n}gg` delete from current line to line `n`
+`:{a},{b}d` delete lines `a` to `b`
+`:,{b}d` delete lines from current until `b`
 
 `daw` delete word under cursor
 `di"` delete inside double quotes
