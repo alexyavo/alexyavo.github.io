@@ -48,7 +48,9 @@ categories: text
 `yy` yank current line including newline
 `{n}yy` yank `n` lines
 `:%y` yank entire file
-`+y` yank to clipboard
+
+`"*y` copy to clipboard
+`"*p` paste from clipboard
 `gg"+yG` - copy entire file to clipboar (`+` is clipboard buffer)
 
 `p` paste yanked / deleted content
