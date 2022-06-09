@@ -8,8 +8,11 @@ categories: text
 `.` repeat last command
 `C-g` show status
 
-`ZZ` save & exit
+`ZZ` `:x` save current file & exit
 `ZQ` exit without saving
+
+`:w` save current file
+`:wa` save all files
 
 `q:` command history
 `q/` search history
