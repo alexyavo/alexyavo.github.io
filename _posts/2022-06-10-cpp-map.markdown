@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "Functional map() in C++"
+date:   2022-06-10
+---
+
+
+{% highlight c++ %}
+template<typename T, typename F, template <typename...> typename C, typename... Args>
+decltype(auto) map(const C<T, Args...>& coll, F f) {
+  C<decltype(f(*coll.begin()))> res(coll.size());
+  transform(coll.cbegin(), coll.cend(), res.begin(), f);
+  return res;
+}
+{% endhighlight %}
+
+- without `Args...` it fails on `could not deduce template argument for 'const C<T> &' from 'std::vector<string,std::allocator<string>>'`
+- should use `back_inserter` instead of `res.begin()`? `back_inserter` uses `push_back`, which auto-resizes the collection, but since size of result collection is known it's better to pre-allocate and use `begin()`?
+
+## Methods for passing functions
+
+[https://vittorioromeo.info/index/blog/passing_functions_to_functions.html](https://vittorioromeo.info/index/blog/passing_functions_to_functions.html)
+
+1. function pointers `void foo(void(*bar)(int)) { ... }`
+   - `+` compiler optimizable
+   - `-` cannot pass lambdas / generic callable objects (?)
+
+2. template params
+  - `+` compiler optimized / no overhead
+  - `-` binary bloat
+
+3. `std::function` - too much runtime overhead?
