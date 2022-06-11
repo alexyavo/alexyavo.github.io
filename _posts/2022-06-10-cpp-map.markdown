@@ -30,3 +30,29 @@ decltype(auto) map(const C<T, Args...>& coll, F f) {
   - `-` binary bloat
 
 3. `std::function` - too much runtime overhead?
+
+## decltype(auto)
+delay type deduction in recursive templates (?)
+
+{% highlight c++ %}
+int i;
+int&& f();
+auto x3a = i;                  // decltype(x3a) is int
+decltype(auto) x3d = i;        // decltype(x3d) is int
+auto x4a = (i);                // decltype(x4a) is int
+decltype(auto) x4d = (i);      // decltype(x4d) is int&
+auto x5a = f();                // decltype(x5a) is int
+decltype(auto) x5d = f();      // decltype(x5d) is int&&
+auto x6a = { 1, 2 };           // decltype(x6a) is std::initializer_list<int>
+decltype(auto) x6d = { 1, 2 }; // error, { 1, 2 } is not an expression
+auto *x7a = &i;                // decltype(x7a) is int*
+decltype(auto)*x7d = &i;       // error, declared type is not plain decltype(auto)
+{% endhighlight %}
+
+perfect return type forwarding:
+{% highlight c++ %}
+template<class Fun, class... Args>
+decltype(auto) Example(Fun fun, Args&&... args) {
+    return fun(std::forward<Args>(args)...);
+}
+{% endhighlight %}
