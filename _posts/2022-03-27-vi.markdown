@@ -185,12 +185,13 @@ then goto last line and `d'a` (delete to mark a)
 `5j` jump 5 lines down
 `5k` jump 5 lines up
 
-`:42` goto line 42 (absolute)
-`42gg`
-
 `zz` move current line to middle of screen
 `zt` move current line to top of screen
 `zb` move current line to bottom of screen
+
+`H` move caret top line (HIGH)
+`M` move caret middle line (MIDDLE)
+`L` move caret bottom line (LOW)
 
 `C-y` move screen up one line
 `C-e` move screen down one line
@@ -215,13 +216,14 @@ then goto last line and `d'a` (delete to mark a)
 `e` end of word
 `b` prev word
 `w` next word
-(also: E, B, W)
+(also: `E`, `B`, `W` for jumping "whole" words e.g. `jump-over-this`)
 
 `{` start of paragraph
 `}` end of paragraph
 
 `gg` start of file
 `G` end of file
+`:42` `42gg` `42G` goto line 42 (absolute)
 
 `f{char}` jump to next occurrence of {char} in line
 `F{char}` jump to prev ...
