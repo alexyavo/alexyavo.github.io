@@ -33,6 +33,10 @@ date:   2022-05-27
 `o` begin a new line below the cursor and insert text
 `O` same, above cursor
 
+`gu` lowercase
+`gU` uppercase
+`g~` switch case
+
 `C-r` redo
 `u` undo
 
@@ -335,15 +339,37 @@ then goto last line and `d'a` (delete to mark a)
   :config (evil-mode t))
 {% endhighlight %}
 
-add to `~/.tmux.conf`: `set -s escape-time 0` [why?](https://evil.readthedocs.io/en/latest/faq.html#problems-with-the-escape-key-in-the-terminal)
+# tmux
+## Delay when pressing ESC
+When running emacs+evil from within a tmux session, you get a delay after you press ESC (it thinks the ESC is a prefix and waits a second or so before it registers it as anactual ESC press, [more details](https://evil.readthedocs.io/en/latest/faq.html#problems-with-the-escape-key-in-the-terminal)).
+
+to fix this, add to `~/.tmux.conf`: `set -s escape-time 0`
+
+## Block/Beam cursor
+Running regular vi in tmux session doesn't change cursor between beam/block when entering/exiting insert mode.
+
+It seems the problem is that tmux doesn't send your cursor-changing escape codes to the terminal emulator. You need to wrap your desired escape codes in a special sequence that tells tmux that it should pass it on to the outer terminal.
+
+try adding this to `~/.vimrc`:
+
+{% highlight vim %}
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[5 q\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+else
+    let &t_SI = "\e[5 q"
+    let &t_EI = "\e[2 q"
+endif
+{% endhighlight %}
+
+escape code may be different for different terminal emulators.
 
 # IdeaVIM
 `~/.ideavimrc`
 
 {% highlight vim %}
 set clipboard+=unnamed
-set relativenumber
-set number
+set relativenumber number
 set ignorecase
 {% endhighlight %}
 
@@ -356,7 +382,7 @@ set showmatch
 set ruler
 set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set ai
-set relativenumber
+set relativenumber number
 set path=$PWD/**
 set ignorecase
 {% endhighlight %}
@@ -381,6 +407,11 @@ set ignorecase
 `Alt-/` autocomplete
 `Alt-Ctrl-.` show implementations / extending classes
 `Alt-i` file layout / jump to function in current file
+
+`C-c s` goto to symbol
+
+`Alt-.` goto definition
+`Alt-,` go back
 
 Build
 Re-Build (clean)
