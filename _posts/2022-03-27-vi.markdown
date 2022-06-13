@@ -4,10 +4,12 @@ title:  "VI"
 date:   2022-05-27
 ---
 
+`:h` `:help`
+
 `.` repeat last command
 `C-g` show status
 
-`ZZ` `:x` save current file & exit
+`ZZ` `:x` `:wq` save current file & exit
 `ZQ` exit without saving
 
 `:w` save current file
@@ -41,7 +43,7 @@ date:   2022-05-27
 `V{line_no}G` select lines upto `{line_no}`
 
 `=` re-indent
-`gqq` wrap line (control w/ `:set tw=80`)
+`gqq` format/wrap line (control w/ `:set tw=80`)
 
 `y` yank selection
 `yy` yank current line including newline
@@ -56,32 +58,43 @@ date:   2022-05-27
 `P` paste before cusror
 
 `x` delete character
+`X` delete character backwards
+`s` delete character and enter insert
 
-`dvb` delete word backwords (`v` toggles inclusivity, `:help inclusive` for details)
+`db` delete word backwords
 `de` delete word forwards
+
 `d$` `D` delete to end of line
-`dd` delete line
 `dh` delete one char backward
+`dd` delete line
+`dj` delete two lines
+
+`di"` delete inside double quotes
+
+`dit` delete inside html tag
+`dat` delete outer html tag
+
+`dib` delete a block surrounded by (
+`diB` delete a block surrrouned by {
+
+`das` delete a sentence
+`dap` delete a paragraph
+
+`dG` delete from current position to end of file
+
+also: `dvj` etc, `v` toggles inclusivity (`:h inclusive`)
+
 `{n}dd` delete `n` lines
-`dG` delete from here to end of file
 `d{n}gg` delete from current line to line `n`
 `:{a},{b}d` delete lines `a` to `b`
 `:,{b}d` delete lines from current until `b`
 
 `daw` delete word under cursor
-`di"` delete inside double quotes
-`dit` delete inside html tag
-`dat` delete outer html tag
-`dib` delete a block surrounded by (
-`diB` delete a block surrrouned by {
-`das` delete a sentence
-`dap` delete a paragraph
+`caw` delete word under cursor and enter insert mode
 
 `ggdG` delete everything
 
-`cc` delete current line and start insert mode
-`s` delete char under cursor and start insert mode
-
+`cc` `S` delete current line and start insert mode
 `ce` "change" motion: will delete the next word and put you in insert mode
 (also, `c$` etc)
 
@@ -108,6 +121,69 @@ date:   2022-05-27
 `:4,8>` indent lines 4 to 8, inclusive
 `set sw=4` setwidth
 
+## Macros / Recording
+`:help recording`
+
+- start recording with `q{letter}`
+- end recording with `q` again
+
+records everything you type (search, movement, replacement)
+
+replay w/ `@{letter}`
+
+`{letter}` designates a register, the same registers used by delete, yank and put. This means you can yank text into a register and then execute it as a command.
+
+`@@` repeat macro
+`100@m` repeat macro recorded to `m` 100 times
+
+## Registers
+`"kyy` copy current line to register `k`
+`"Kyy` append
+
+`"kp` paste contents of register `k`
+
+`:reg` display contents of all registers
+
+if you yank text without assigning it to a particular register, it will be assigned to the `0` register, as well as the default `"` register.
+
+`0` vs `"`: `0` populated w/ only yanked text, while `"` also `ontains deleted text (from d/x/c/s)
+
+register `1` holds last deletion / change(?)
+register `2` holds second last deletion / change(?)
+etc. (up to `9`)
+
+`"` is the command to use a register for the next command
+`"*` or `"+` clipboard
+`"/` last search command
+`":` last command-line command
+`"_` is the `/dev/null` of registers (`noremap x "_x` deletes single chars without updating default register)
+
+while in ex-mode command (?), `C-r {register}` to paste the contents of `{register}` (e.g. useful for search/replace, pasting the string you want to replace)
+
+## Markers
+`'a` point to beginning of line of the marker
+`a points to exact location
+
+### Comment out a block
+1. mark w/ `ma`
+2. go to end of block
+3. `:'a,.s/^/#`
+
+### Move a Block w/ markers
+1. mark w/ `ma`
+2. go to end of block, `mb`
+3. go to target location, `:'a,'bmo .`
+
+### Yank to a register
+1. mark w/ `ma`
+2. go to end of block
+3. `:'a,.ya a` yank block into register `a`
+4. `:'a,.ya A` append block to contents of register `a`
+
+### Delete all lines from current to marked one
+goto starting line and type `ma` (mark a)
+then goto last line and `d'a` (delete to mark a)
+
 ## Find Replace
 [https://vim.fandom.com/wiki/Search_and_replace](https://vim.fandom.com/wiki/Search_and_replace)
 
@@ -118,10 +194,6 @@ date:   2022-05-27
 `:%s/foo/bar/gci` case insensitive + confirm
 
 `:%s/\<\@!\([A-Z]\)/\-\l\1/g` replace `camelCaseName` to `camel-case-name`
-
-## Delete all lines from current to marked one
-goto starting line and type `ma` (mark a)
-then goto last line and `d'a` (delete to mark a)
 
 ## Rename Variable
 - place caret on variable usage
@@ -208,14 +280,14 @@ then goto last line and `d'a` (delete to mark a)
 \`\` goto last location
 
 `mk` mark current position as k (can be any letter)
-\`k return to position "k"
+`k return to position "k"
 
 `H` goto the first line of current screen.
 `L` goto the last line of current screen.
 
-`e` end of word
-`b` prev word
+`e` move cursor to last char of current word
 `w` next word
+`b` prev word (the inverse of `w`)
 (also: `E`, `B`, `W` for jumping "whole" words e.g. `jump-over-this`)
 
 `{` start of paragraph
@@ -243,6 +315,8 @@ then goto last line and `d'a` (delete to mark a)
 `:set nohlsearch` turn off the previous option completely
 `:noh` turn off search highlight until next search
 
+`:set ignorecase` use `\c` anywhere in search query to ignore case, `\C` to match case.
+
 # Filesystem Navigation
 `:e file` open file
 `:n file1 file2` multiple files
@@ -264,13 +338,18 @@ then goto last line and `d'a` (delete to mark a)
 add to `~/.tmux.conf`: `set -s escape-time 0` [why?](https://evil.readthedocs.io/en/latest/faq.html#problems-with-the-escape-key-in-the-terminal)
 
 # IdeaVIM
-`~/.ideavimrc`:
+`~/.ideavimrc`
 
 {% highlight vim %}
 set clipboard+=unnamed
+set relativenumber
+set number
+set ignorecase
 {% endhighlight %}
 
 # Config
+`~/.vimrc`
+
 {% highlight vim %}
 syntax on
 set showmatch
@@ -279,6 +358,7 @@ set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set ai
 set relativenumber
 set path=$PWD/**
+set ignorecase
 {% endhighlight %}
 
 
@@ -295,3 +375,22 @@ set path=$PWD/**
 `:set ts?` (etc) gives current value of option
 `:set vimrcpaths?`
 `:set vimrc?`
+
+# Other
+`Alt-Shift-P` show param hint
+`Alt-/` autocomplete
+`Alt-Ctrl-.` show implementations / extending classes
+`Alt-i` file layout / jump to function in current file
+
+Build
+Re-Build (clean)
+
+Run
+Run (choose)
+Debug
+Debug (choose)
+
+## Debugging
+Step Over
+Step In
+Step Out
