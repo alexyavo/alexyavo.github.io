@@ -73,7 +73,8 @@ date:   2022-05-27
 `dd` delete line
 `dj` delete two lines
 
-`di"` delete inside double quotes
+`di{char}` delete inside area surrounded by `{char}` (e.g. `di"` deletes within double-quotes)
+`da{char}` deletes area within `{char}` as well as `{char}`s
 
 `dit` delete inside html tag
 `dat` delete outer html tag
@@ -141,6 +142,8 @@ replay w/ `@{letter}`
 `100@m` repeat macro recorded to `m` 100 times
 
 ## Registers
+`"` is the command to use a register for the next command
+
 `"kyy` copy current line to register `k`
 `"Kyy` append
 
@@ -150,13 +153,12 @@ replay w/ `@{letter}`
 
 if you yank text without assigning it to a particular register, it will be assigned to the `0` register, as well as the default `"` register.
 
-`0` vs `"`: `0` populated w/ only yanked text, while `"` also `ontains deleted text (from d/x/c/s)
+`"0` vs `""`: `"0` populated w/ only yanked text, while `""` also `ontains deleted text (from d/x/c/s)
 
-register `1` holds last deletion / change(?)
-register `2` holds second last deletion / change(?)
-etc. (up to `9`)
+register `"1` holds last deletion / change(?)
+register `"2` holds second last deletion / change(?)
+etc. (up to `"9`)
 
-`"` is the command to use a register for the next command
 `"*` or `"+` clipboard
 `"/` last search command
 `":` last command-line command
@@ -257,6 +259,9 @@ then goto last line and `d'a` (delete to mark a)
 `:help jump-motions`
 
 `:set relativenumber` relative line numbers
+
+`0` start of line
+`^` first non-whitespace char of line (alt: `0w` skips whitespace too, easier to use)
 
 `5j` jump 5 lines down
 `5k` jump 5 lines up
@@ -401,27 +406,3 @@ set ignorecase
 `:set ts?` (etc) gives current value of option
 `:set vimrcpaths?`
 `:set vimrc?`
-
-# Other
-`Alt-Shift-P` show param hint
-`Alt-/` autocomplete
-`Alt-Ctrl-.` show implementations / extending classes
-`Alt-i` file layout / jump to function in current file
-
-`C-c s` goto to symbol
-
-`Alt-.` goto definition
-`Alt-,` go back
-
-Build
-Re-Build (clean)
-
-Run
-Run (choose)
-Debug
-Debug (choose)
-
-## Debugging
-Step Over
-Step In
-Step Out
