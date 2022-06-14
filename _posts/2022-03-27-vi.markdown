@@ -303,7 +303,7 @@ then goto last line and `d'a` (delete to mark a)
 (also: `E`, `B`, `W` for jumping WORDS)
 
 word: `A-Z a-z 0-9 _`
-WORD: `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
+WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 
 `{` start of paragraph
 `}` end of paragraph
