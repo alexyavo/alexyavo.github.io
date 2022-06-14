@@ -261,9 +261,6 @@ then goto last line and `d'a` (delete to mark a)
 `j` `C-n` move line down
 `k` `C-p` move line up
 
-`0` start of line
-`^` first non-whitespace char of line (alt: `0w` skips whitespace too, easier to use)
-
 `5j` jump 5 lines down
 `5k` jump 5 lines up
 
@@ -282,9 +279,10 @@ then goto last line and `d'a` (delete to mark a)
 `C-b` move screen up one page, cursor to last line
 `C-f` move screen down one page, cursor to first line
 
+`$` goto the end of the current line.
 `0` goto the starting of the current line.
 `^` goto the first non blank character of the line.
-`$` goto the end of the current line.
+(alt: `0w` skips whitespace too, easier to use)
 
 `''` goto last location (start of line)
 \`\` goto last location
