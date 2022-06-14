@@ -153,7 +153,7 @@ replay w/ `@{letter}`
 
 if you yank text without assigning it to a particular register, it will be assigned to the `0` register, as well as the default `"` register.
 
-`"0` vs `""`: `"0` populated w/ only yanked text, while `""` also `ontains deleted text (from d/x/c/s)
+`"0` vs `""`: `"0` populated w/ only yanked text, while `""` also contains deleted text (from d/x/c/s)
 
 register `"1` holds last deletion / change(?)
 register `"2` holds second last deletion / change(?)
