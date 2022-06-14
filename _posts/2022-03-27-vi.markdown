@@ -248,9 +248,6 @@ then goto last line and `d'a` (delete to mark a)
 `gT` prev tab
 `{n}gt` switch to tab `n`
 
-`gd` jump to local definition
-`C-]` jump to tag
-
 `:tabl` last tab
 `:tabclose`
 
@@ -258,7 +255,11 @@ then goto last line and `d'a` (delete to mark a)
 `:help mark-motions`
 `:help jump-motions`
 
-`:set relativenumber` relative line numbers
+`:set relativenumber number` relative line numbers + display curr line num
+
+(line movements compat w/ emacs)
+`j` `C-n` move line down
+`k` `C-p` move line up
 
 `0` start of line
 `^` first non-whitespace char of line (alt: `0w` skips whitespace too, easier to use)
@@ -297,7 +298,12 @@ then goto last line and `d'a` (delete to mark a)
 `e` move cursor to last char of current word
 `w` next word
 `b` prev word (the inverse of `w`)
-(also: `E`, `B`, `W` for jumping "whole" words e.g. `jump-over-this`)
+`ge` back to end of word
+`gE` back to end of WORD
+(also: `E`, `B`, `W` for jumping WORDS)
+
+word: `A-Z a-z 0-9 _`
+WORD: `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 
 `{` start of paragraph
 `}` end of paragraph
@@ -316,6 +322,15 @@ then goto last line and `d'a` (delete to mark a)
 `[{` goto scope start
 
 `set path=$PWD/**` and then `:find filename` (+tab completion)
+
+`gi` insert in same position where insert was last active
+
+`gd` jump to local definition
+`gf` jump to file under cursor
+`C-]` jump to tag
+`C-o` go back
+`C-i` go fwd
+(details: `:h jumplist`)
 
 `/txt` search for next occurance
 `?txt` search for prev occurance
