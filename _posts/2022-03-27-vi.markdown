@@ -23,7 +23,7 @@ date:   2022-05-27
 
 `:set list` / `:set nolist` show/hide whitespace
 
-# Text Editing
+## Text Editing ##
 `i` insert before cursor
 `a` insert after cursor
 
@@ -126,7 +126,8 @@ also: `dvj` etc, `v` toggles inclusivity (`:h inclusive`)
 `:4,8>` indent lines 4 to 8, inclusive
 `set sw=4` setwidth
 
-## Macros / Recording
+### Macros / Recording ###
+
 `:help recording`
 
 - start recording with `q{letter}`
@@ -141,7 +142,8 @@ replay w/ `@{letter}`
 `@@` repeat macro
 `100@m` repeat macro recorded to `m` 100 times
 
-## Registers
+### Registers ###
+
 `"` is the command to use a register for the next command
 
 `"kyy` copy current line to register `k`
@@ -166,31 +168,37 @@ etc. (up to `"9`)
 
 while in ex-mode command (?), `C-r {register}` to paste the contents of `{register}` (e.g. useful for search/replace, pasting the string you want to replace)
 
-## Markers
+### Markers ###
+
 `'a` point to beginning of line of the marker
 `a points to exact location
 
-### Comment out a block
+#### Comment out a block ####
+
 1. mark w/ `ma`
 2. go to end of block
 3. `:'a,.s/^/#`
 
-### Move a Block w/ markers
+#### Move a Block w/ markers ####
+
 1. mark w/ `ma`
 2. go to end of block, `mb`
 3. go to target location, `:'a,'bmo .`
 
-### Yank to a register
+#### Yank to a register ####
+
 1. mark w/ `ma`
 2. go to end of block
 3. `:'a,.ya a` yank block into register `a`
 4. `:'a,.ya A` append block to contents of register `a`
 
-### Delete all lines from current to marked one
+#### Delete all lines from current to marked one ####
+
 goto starting line and type `ma` (mark a)
 then goto last line and `d'a` (delete to mark a)
 
-## Find Replace
+### Find Replace ###
+
 [https://vim.fandom.com/wiki/Search_and_replace](https://vim.fandom.com/wiki/Search_and_replace)
 
 `:s/foo/bar/g` replace foo w/ bar in current line
@@ -201,7 +209,8 @@ then goto last line and `d'a` (delete to mark a)
 
 `:%s/\<\@!\([A-Z]\)/\-\l\1/g` replace `camelCaseName` to `camel-case-name`
 
-## Rename Variable
+### Rename Variable ###
+
 - place caret on variable usage
 - `gd` goto local definition
 - `[{` goto start of scope
@@ -209,7 +218,7 @@ then goto last line and `d'a` (delete to mark a)
 - `%` goto end of scope
 - `:'<,'>s//newname/gc` search & replace w/ confirm
 
-# Windows / Buffers
+## Windows / Buffers ##
 `C-w v` vertical split
 `C-w s` horizontal split
 
@@ -240,7 +249,7 @@ then goto last line and `d'a` (delete to mark a)
 
 `:vertical sball` open all buffers in vertical split
 
-# Tabs
+## Tabs ##
 `:Tex` open new tab and open fs browser
 `:tabnew <filepath>`
 
@@ -251,7 +260,7 @@ then goto last line and `d'a` (delete to mark a)
 `:tabl` last tab
 `:tabclose`
 
-# Text Navigation
+## Text Navigation ##
 `:help mark-motions`
 `:help jump-motions`
 
@@ -339,7 +348,7 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 
 `:set ignorecase` use `\c` anywhere in search query to ignore case, `\C` to match case.
 
-# Filesystem Navigation
+## Filesystem Navigation ##
 `:e file` open file
 `:n file1 file2` multiple files
 `:Ex ~` browse a dir to open file from
@@ -348,7 +357,7 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 `:Vex` vertical split
 `:Tex` new tab + browse
 
-# evil
+## evil ##
 {% highlight emacs-lisp %}
 ((use-package evil :ensure t
   :init
@@ -357,13 +366,16 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
   :config (evil-mode t))
 {% endhighlight %}
 
-# tmux
-## Delay when pressing ESC
+## TMUX ##
+
+### Delay when pressing ESC ###
+
 When running emacs+evil from within a tmux session, you get a delay after you press ESC (it thinks the ESC is a prefix and waits a second or so before it registers it as anactual ESC press, [more details](https://evil.readthedocs.io/en/latest/faq.html#problems-with-the-escape-key-in-the-terminal)).
 
 to fix this, add to `~/.tmux.conf`: `set -s escape-time 0`
 
-## Block/Beam cursor
+### Block/Beam cursor ###
+
 Running regular vi in tmux session doesn't change cursor between beam/block when entering/exiting insert mode.
 
 It seems the problem is that tmux doesn't send your cursor-changing escape codes to the terminal emulator. You need to wrap your desired escape codes in a special sequence that tells tmux that it should pass it on to the outer terminal.
@@ -382,7 +394,8 @@ endif
 
 escape code may be different for different terminal emulators.
 
-# IdeaVIM
+## IdeaVIM ##
+
 `~/.ideavimrc`
 
 {% highlight vim %}
@@ -391,7 +404,7 @@ set relativenumber number
 set ignorecase
 {% endhighlight %}
 
-# Config
+## Config ##
 `~/.vimrc`
 
 {% highlight vim %}
@@ -404,7 +417,6 @@ set relativenumber number
 set path=$PWD/**
 set ignorecase
 {% endhighlight %}
-
 
 `tabstop` `ts` The width of a hard tabstop measured in "spaces" -- effectively the (maximum) width of an actual tab character.
 
