@@ -15,7 +15,23 @@ decltype(auto) map(const C<T, Args...>& coll, F f) {
 {% endhighlight %}
 
 - without `Args...` it fails on `could not deduce template argument for 'const C<T> &' from 'std::vector<string,std::allocator<string>>'`
+
 - should use `back_inserter` instead of `res.begin()`? `back_inserter` uses `push_back`, which auto-resizes the collection, but since size of result collection is known it's better to pre-allocate and use `begin()`?
+
+- doesn't work for types without default ctor (due the pre-allocation on the first line); an alternative that fixes this:
+{% highlight c++ %}
+template<typename T, typename F, template <typename...> typename C, typename... Args>
+decltype(auto) map(const C<T, Args...>& coll, F f) {
+  C<decltype(f(*coll.begin()))> res{};
+  for (auto it = coll.cbegin(); it != coll.cend(); ++it) {
+    res.push_back(f(*it));
+  }
+
+  return res;
+}
+{% endhighlight %}
+
+- for `set` this doesn't work because it doesn't have `push_back`
 
 ## Methods for passing functions
 
