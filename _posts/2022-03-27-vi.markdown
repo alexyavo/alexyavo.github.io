@@ -276,6 +276,8 @@ then goto last line and `d'a` (delete to mark a)
 `5j` jump 5 lines down
 `5k` jump 5 lines up
 
+`gj` `gk` navigate wrapped lines
+
 `zz` move current line to middle of screen
 `zt` move current line to top of screen
 `zb` move current line to bottom of screen
@@ -371,6 +373,13 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
   (setq evil-default-state 'normal) ;; 'emacs
   :config (evil-mode t))
 {% endhighlight %}
+
+### Doom Emacs
+
+`g s j`, `g s k` evil-easymotion
+
+`evil-lion`: select lines, `gl<c>` will regex-align on `<c>` (`gL` will right-align)
+instead of selecting lines works w/ `glib` (select block), `glip` (paragraph) etc.
 
 ## TMUX ##
 
