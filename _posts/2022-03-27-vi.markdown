@@ -356,6 +356,11 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 
 `:set ignorecase` use `\c` anywhere in search query to ignore case, `\C` to match case.
 
+`:jumps` list all visited locations
+current location is indicated w/ `>`
+
+prefix `C-o` w/ a number to change jump dst: `<n>C-o`
+
 ## Filesystem Navigation ##
 `:e file` open file
 `:n file1 file2` multiple files
@@ -375,11 +380,24 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 {% endhighlight %}
 
 ### Doom Emacs
-
 `g s j`, `g s k` evil-easymotion
+
+`find-name-dired` too look for files under specified dir.
+
+#### evil-lion (alternative to align-regex)
 
 `evil-lion`: select lines, `gl<c>` will regex-align on `<c>` (`gL` will right-align)
 instead of selecting lines works w/ `glib` (select block), `glip` (paragraph) etc.
+
+example:
+
+```
+int x = 0;
+int xx = 1;
+int xxx = 2;
+```
+
+visual-select the three lines and then `gl=` or `gL=`
 
 ## TMUX ##
 
