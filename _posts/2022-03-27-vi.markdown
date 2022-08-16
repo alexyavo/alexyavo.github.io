@@ -345,7 +345,10 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 `C-]` jump to tag
 `C-o` go back
 `C-i` go fwd
-(details: `:h jumplist`)
+(subdirsdetails: `:h jumplist`)
+
+`:jumps` list all visited locations
+current location is indicated w/ `>`
 
 `/txt` search for next occurance
 `?txt` search for prev occurance
@@ -355,9 +358,6 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 `:noh` turn off search highlight until next search
 
 `:set ignorecase` use `\c` anywhere in search query to ignore case, `\C` to match case.
-
-`:jumps` list all visited locations
-current location is indicated w/ `>`
 
 prefix `C-o` w/ a number to change jump dst: `<n>C-o`
 
