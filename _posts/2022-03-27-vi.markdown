@@ -23,6 +23,9 @@ date:   2022-05-27
 
 `:set list` / `:set nolist` show/hide whitespace
 
+`<leader>` is mapped to `\` by default (`:help leader`)
+to change leader: `let mapleader = ","`
+
 ## Text Editing ##
 `i` insert before cursor
 `a` insert after cursor
@@ -145,6 +148,12 @@ replay w/ `@{letter}`
 `@@` repeat macro
 `100@m` repeat macro recorded to `m` 100 times
 
+`nnoremap <leader>1 yypVr=`
+- Yank/copy the current line.
+- Paste it below (and move down to the pasted version).
+- Select the copied line.
+- Replace every character with =.
+
 ### Registers ###
 
 `"` is the command to use a register for the next command
@@ -220,6 +229,7 @@ then goto last line and `d'a` (delete to mark a)
 - `V` visual select
 - `%` goto end of scope
 - `:'<,'>s//newname/gc` search & replace w/ confirm
+
 
 ## Windows / Buffers ##
 `C-w v` vertical split
