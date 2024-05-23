@@ -355,6 +355,8 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 `C-]` jump to tag
 `C-o` go back
 `C-i` go fwd
+`g;` jump to previous change location
+`g,` jump to newer change location
 (subdirsdetails: `:h jumplist`)
 
 `:jumps` list all visited locations
@@ -380,15 +382,6 @@ prefix `C-o` w/ a number to change jump dst: `<n>C-o`
 `:Vex` vertical split
 `:Tex` new tab + browse
 
-## evil ##
-{% highlight emacs-lisp %}
-((use-package evil :ensure t
-  :init
-  (setq evil-want-C-u-scroll t)
-  (setq evil-default-state 'normal) ;; 'emacs
-  :config (evil-mode t))
-{% endhighlight %}
-
 ### Doom Emacs
 `g s j`, `g s k` evil-easymotion
 
@@ -411,8 +404,8 @@ visual-select the three lines and then `gl=` or `gL=`
 
 ## TMUX ##
 
-### Copy / Paste ### 
-`C-\ [` enter copy mode 
+### Copy / Paste ###
+`C-\ [` enter copy mode
 
 - navigate w/ vi keys
 - `SPACE` to start copying (WSL) (might be `C-SPACE` (?) elsewhere)
@@ -446,17 +439,7 @@ endif
 
 escape code may be different for different terminal emulators.
 
-## IdeaVIM ##
-
-`~/.ideavimrc`
-
-{% highlight vim %}
-set clipboard+=unnamed
-set relativenumber number
-set ignorecase
-{% endhighlight %}
-
-## Config ##
+## Basic Config ##
 `~/.vimrc`
 
 {% highlight vim %}
@@ -483,3 +466,18 @@ set ignorecase
 `:set ts?` (etc) gives current value of option
 `:set vimrcpaths?`
 `:set vimrc?`
+
+## map command variations ##
+`remap` is an option that makes mappings work recursively (?)
+
+mapping commands:
+`:map` recursive (if you map `a` to `b` and `b` to `c`, `a` will be mapped to `c`)
+`:noremap` non-recursive
+
+`:map` and `:noremap` work in normal, visual, select, and operator modes
+`:nmap` and `:nnoremap` work in normal mode
+`:xmap` and `:xnoremap` work in visual mode
+
+`:help :map`
+`:help recursive_mapping`
+`:help :map-modes`
