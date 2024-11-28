@@ -13,6 +13,8 @@ date:   2022-05-27
 `ZQ` exit without saving
 
 `:w` save current file
+`:w filename` for buffers w/o file
+
 `:wa` save all files
 
 `q:` command history
@@ -375,6 +377,7 @@ prefix `C-o` w/ a number to change jump dst: `<n>C-o`
 
 ## Filesystem Navigation ##
 `:e file` open file
+`:e` reverts buffer
 `:n file1 file2` multiple files
 `:Ex ~` browse a dir to open file from
 `:E` browse
