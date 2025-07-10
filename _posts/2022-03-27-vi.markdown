@@ -348,6 +348,11 @@ WORD: word + `~!@#$%^&*()-=+[{]};:"\|,<.>/?`
 `%` goto matching parens
 `[{` goto scope start
 
+`[m` goto start of previous function
+`]m` goto start of next function
+`[M` goto end of previous function
+`]M` goto end of next function
+
 `set path=$PWD/**` and then `:find filename` (+tab completion)
 
 `gi` insert in same position where insert was last active
