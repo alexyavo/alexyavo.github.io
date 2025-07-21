@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Light theme (default) */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #2c3e50;
+            --header-bg: #f8f9fa;
+            --link-color: #007bff;
+        }
+
+        /* Dark theme */
+        [data-theme="dark"] {
+            --bg-color: #1a1a1a;
+            --text-color: #e9ecef;
+            --header-bg: #2d2d2d;
+            --link-color: #66b3ff;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding: 20px;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px;
+            background: var(--header-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: var(--header-bg);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        a {
+            color: var(--link-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark Mode Toggle -->
+    <div class="dark-mode-toggle">
+        <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="darkSwitch" />
+            <label class="form-check-label" for="darkSwitch">🌙 Dark Mode</label>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Dark Mode Test</h1>
+            <p>This is a test page to verify the dark mode switch works correctly.</p>
+        </div>
+
+        <div class="content">
+            <h2>Sample Content</h2>
+            <p>This content should change colors when you toggle the dark mode switch in the top-right corner.</p>
+            <p>Click the toggle to switch between light and dark themes. The preference should be saved in localStorage.</p>
+            
+            <h3>Links Test</h3>
+            <p>Here's a <a href="#">sample link</a> to test link colors in both themes.</p>
+
+            <h3>Code Example</h3>
+            <pre><code>console.log('Dark mode is working!');</code></pre>
+        </div>
+    </div>
+
+    <!-- Dark Mode Switch Script -->
+    <script src="assets/js/dark-mode-switch.min.js"></script>
+</body>
+</html> 

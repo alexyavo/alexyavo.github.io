@@ -1,0 +1,183 @@
+--- # Front matter comment to enable Jekyll processing ---
+
+@import "minima";
+
+/* Light theme (default) */
+:root {
+--bg-color: #ffffff;
+--text-color: #2c3e50;
+    --header-bg: #f8f9fa;
+    --header-text: #2c3e50;
+    --link-color: #007bff;
+    --link-hover: #0056b3;
+    --border-color: #e9ecef;
+    --code-bg: #f8f9fa;
+    --blockquote-border: #e9ecef;
+    --table-border: #dee2e6;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+--bg-color: #1a1a1a;
+    --text-color: #e9ecef;
+    --header-bg: #2d2d2d;
+    --header-text: #ffffff;
+    --link-color: #66b3ff;
+    --link-hover: #99ccff;
+    --border-color: #444444;
+    --code-bg: #2d2d2d;
+    --blockquote-border: #444444;
+    --table-border: #444444;
+}
+
+/* Apply theme variables */
+body {
+background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Dark mode toggle styling */
+.dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    padding: 10px;
+    background: var(--header-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode-toggle .form-check {
+    margin: 0;
+}
+
+.dark-mode-toggle .form-check-label {
+    color: var(--text-color);
+    font-size: 14px;
+    margin-left: 8px;
+}
+/* Header styles */
+.site-header {
+background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-title {
+    color: var(--header-text) !important;
+}
+
+.site-nav .page-link {
+    color: var(--header-text);
+}
+
+.site-nav .page-link:hover {
+    color: var(--link-hover);
+}
+
+/* Content styles */
+a {
+color: var(--link-color);
+}
+
+a:hover {
+color: var(--link-hover);
+}
+
+/* Code blocks */
+pre,
+code {
+background-color: var(--code-bg);
+    border: 1px solid var(--border-color);
+color: var(--text-color);
+}
+
+/* Blockquotes */
+blockquote {
+border-left: 4px solid var(--blockquote-border);
+    background-color: var(--code-bg);
+color: var(--text-color);
+}
+
+/* Tables */
+table {
+border: 1px solid var(--table-border);
+}
+
+table th,
+table td {
+border-bottom: 1px solid var(--table-border);
+color: var(--text-color);
+}
+
+table th {
+    background-color: var(--code-bg);
+}
+
+/* Footer */
+.site-footer {
+background-color: var(--header-bg);
+    border-top: 1px solid var(--border-color);
+    color: var(--header-text);
+}
+
+.site-footer a {
+color: var(--link-color);
+}
+
+.site-footer a:hover {
+color: var(--link-hover);
+}
+
+/* Post content */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post-content h5,
+.post-content h6 {
+color: var(--text-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .dark-mode-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 8px;
+    }
+
+    .dark-mode-toggle .form-check-label {
+        font-size: 12px;
+    }
+}
+
+/* Dark theme specific adjustments */
+[data-theme="dark"] .highlight {
+background: var(--code-bg);
+}
+
+/* Syntax highlighting for dark theme */
+[data-theme="dark"] .highlight .c,
+[data-theme="dark"] .highlight .cm,
+[data-theme="dark"] .highlight .cp,
+[data-theme="dark"] .highlight .c1 {
+color: #6a737d;
+}
+
+[data-theme="dark"] .highlight .k,
+[data-theme="dark"] .highlight .kd,
+[data-theme="dark"] .highlight .kn,
+[data-theme="dark"] .highlight .kp,
+[data-theme="dark"] .highlight .kr,
+[data-theme="dark"] .highlight .kt {
+color: #f97583;
+}
+
+[data-theme="dark"] .highlight .s,
+[data-theme="dark"] .highlight .s1,
+[data-theme="dark"] .highlight .s2 {
+color: #9ecbff;
+}

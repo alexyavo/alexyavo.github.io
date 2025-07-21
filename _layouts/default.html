@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+    {%- include header.html -%}
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <!-- Dark Mode Toggle -->
+        <div class="dark-mode-toggle">
+          <div class="form-check form-switch">
+            <input type="checkbox" class="form-check-input" id="darkSwitch" />
+            <label class="form-check-label" for="darkSwitch">🌙 Dark Mode</label>
+          </div>
+        </div>
+        
+        {{ content }}
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+
+    <!-- Dark Mode Switch Script -->
+    <script src="{{ "/assets/js/dark-mode-switch.min.js" | relative_url }}"></script>
+
+  </body>
+
+</html> 
