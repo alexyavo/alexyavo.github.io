@@ -1,0 +1,346 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+  <link rel="stylesheet" href="{{ "/assets/main.css" | relative_url }}">
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+  
+  <!-- Prevent flash of white during dark mode transitions -->
+  <style>
+    /* Prevent flash of white content */
+    html {
+      background-color: #ffffff;
+    }
+    
+    html[data-theme="dark"] {
+      background-color: #282828 !important;
+    }
+    
+    /* Light theme variables */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #2c3e50;
+      --header-bg: #f8f9fa;
+      --header-text: #2c3e50;
+      --link-color: #007bff;
+      --link-hover: #0056b3;
+      --border-color: #e9ecef;
+      --code-bg: #f8f9fa;
+      --code-text: #e83e8c;
+      --blockquote-border: #e9ecef;
+      --table-border: #dee2e6;
+      --selection-bg: #007bff20;
+    }
+    
+    /* Gruvbox Dark theme */
+    [data-theme="dark"] {
+      --bg-color: #282828;
+      --text-color: #ebdbb2;
+      --header-bg: #1d2021;
+      --header-text: #ebdbb2;
+      --link-color: #83a598;
+      --link-hover: #8ec07c;
+      --border-color: #504945;
+      --code-bg: #1d2021;
+      --code-text: #8ec07c;
+      --blockquote-border: #665c54;
+      --table-border: #504945;
+      --selection-bg: #458588;
+      
+      /* Gruvbox syntax highlighting colors */
+      --syntax-comment: #928374;
+      --syntax-keyword: #fb4934;
+      --syntax-string: #b8bb26;
+      --syntax-number: #d3869b;
+      --syntax-function: #fabd2f;
+      --syntax-class: #83a598;
+      --syntax-variable: #fe8019;
+      --syntax-operator: #8ec07c;
+    }
+    
+    /* Apply theme variables and ensure proper layout */
+    body {
+      background-color: var(--bg-color) !important;
+      color: var(--text-color) !important;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      /* Ensure flex layout is maintained */
+      display: flex !important;
+      min-height: 100vh !important;
+      flex-direction: column !important;
+    }
+    
+    /* Ensure main content area is properly structured */
+    .page-content {
+      flex: 1 !important;
+    }
+    
+    /* Ensure wrapper maintains centering */
+    .wrapper {
+      max-width: calc(800px - (30px * 2)) !important;
+      margin-right: auto !important;
+      margin-left: auto !important;
+      padding-right: 30px !important;
+      padding-left: 30px !important;
+    }
+    
+    @media screen and (max-width: 800px) {
+      .wrapper {
+        max-width: calc(800px - (30px)) !important;
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+      }
+    }
+    
+    /* Selection styling */
+    ::selection {
+      background-color: var(--selection-bg);
+      color: var(--text-color);
+    }
+    
+    /* Dark mode toggle positioning */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--header-bg);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+    
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin: 0;
+    }
+    
+    .form-check-input {
+      margin-right: 8px;
+      accent-color: var(--link-color);
+    }
+    
+    .form-check-label {
+      margin: 0;
+      font-size: 14px;
+      color: var(--text-color);
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    /* Enhanced styling for all elements */
+    a {
+      color: var(--link-color) !important;
+      transition: color 0.2s ease;
+      text-decoration: none;
+    }
+    
+    a:hover {
+      color: var(--link-hover) !important;
+      text-decoration: underline;
+    }
+    
+    .site-header {
+      background-color: var(--header-bg) !important;
+      border-bottom: 1px solid var(--border-color) !important;
+    }
+    
+    .site-title, .site-nav .page-link {
+      color: var(--header-text) !important;
+    }
+    
+    /* Code and syntax highlighting */
+    pre, code {
+      background-color: var(--code-bg) !important;
+      color: var(--code-text) !important;
+      border: 1px solid var(--border-color) !important;
+      font-family: 'Fira Code', 'Monaco', 'Consolas', monospace !important;
+    }
+    
+    /* Inline code */
+    code {
+      padding: 2px 4px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    
+    /* Code blocks */
+    pre {
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      line-height: 1.4;
+    }
+    
+    pre code {
+      background: none !important;
+      border: none !important;
+      padding: 0;
+      font-size: 0.95em;
+    }
+    
+    /* Syntax highlighting for dark theme */
+    [data-theme="dark"] .highlight .c { color: var(--syntax-comment); font-style: italic; } /* Comment */
+    [data-theme="dark"] .highlight .k { color: var(--syntax-keyword); font-weight: bold; } /* Keyword */
+    [data-theme="dark"] .highlight .s { color: var(--syntax-string); } /* String */
+    [data-theme="dark"] .highlight .m { color: var(--syntax-number); } /* Number */
+    [data-theme="dark"] .highlight .nf { color: var(--syntax-function); } /* Function */
+    [data-theme="dark"] .highlight .nc { color: var(--syntax-class); } /* Class */
+    [data-theme="dark"] .highlight .nv { color: var(--syntax-variable); } /* Variable */
+    [data-theme="dark"] .highlight .o { color: var(--syntax-operator); } /* Operator */
+    [data-theme="dark"] .highlight .kd { color: var(--syntax-keyword); } /* Keyword Declaration */
+    [data-theme="dark"] .highlight .kt { color: var(--syntax-class); } /* Keyword Type */
+    [data-theme="dark"] .highlight .na { color: var(--syntax-function); } /* Name Attribute */
+    [data-theme="dark"] .highlight .nb { color: var(--syntax-class); } /* Name Builtin */
+    [data-theme="dark"] .highlight .mi { color: var(--syntax-number); } /* Number Integer */
+    [data-theme="dark"] .highlight .mf { color: var(--syntax-number); } /* Number Float */
+    [data-theme="dark"] .highlight .se { color: var(--syntax-string); } /* String Escape */
+    [data-theme="dark"] .highlight .si { color: var(--syntax-string); } /* String Interpolation */
+    
+    /* Additional Gruvbox syntax colors */
+    [data-theme="dark"] .highlight .cp { color: #fe8019; } /* Comment Preproc */
+    [data-theme="dark"] .highlight .c1 { color: var(--syntax-comment); font-style: italic; } /* Comment Single */
+    [data-theme="dark"] .highlight .cs { color: var(--syntax-comment); font-style: italic; } /* Comment Special */
+    [data-theme="dark"] .highlight .gd { color: #fb4934; background-color: #3c1f1e; } /* Generic Deleted */
+    [data-theme="dark"] .highlight .gi { color: #b8bb26; background-color: #32361a; } /* Generic Inserted */
+    [data-theme="dark"] .highlight .nt { color: #fb4934; } /* Name Tag */
+    [data-theme="dark"] .highlight .nn { color: #fabd2f; } /* Name Namespace */
+    
+    /* Blockquotes */
+    blockquote {
+      border-left: 4px solid var(--blockquote-border) !important;
+      color: var(--text-color) !important;
+      background-color: var(--code-bg) !important;
+      padding: 16px !important;
+      margin: 16px 0 !important;
+      border-radius: 0 8px 8px 0 !important;
+    }
+    
+    /* Tables */
+    table {
+      border: 1px solid var(--table-border) !important;
+      background-color: var(--code-bg) !important;
+      width: 100% !important;
+      margin-bottom: 15px !important;
+    }
+    
+    table th, table td {
+      border: 1px solid var(--table-border) !important;
+      color: var(--text-color) !important;
+      padding: 8px 12px !important;
+    }
+    
+    table th {
+      background-color: var(--header-bg) !important;
+      font-weight: 600;
+    }
+    
+    /* Headers */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--text-color) !important;
+      margin-bottom: 15px !important;
+    }
+    
+    [data-theme="dark"] h1 { color: #fabd2f !important; }
+    [data-theme="dark"] h2 { color: #83a598 !important; }
+    [data-theme="dark"] h3 { color: #d3869b !important; }
+    
+    /* Lists */
+    ul, ol {
+      color: var(--text-color) !important;
+      margin-bottom: 15px !important;
+    }
+    
+    /* Paragraphs */
+    p {
+      color: var(--text-color) !important;
+      margin-bottom: 15px !important;
+    }
+    
+    /* Horizontal rules */
+    hr {
+      border-color: var(--border-color) !important;
+    }
+    
+    /* Footer */
+    .site-footer {
+      background-color: var(--header-bg) !important;
+      border-top: 1px solid var(--border-color) !important;
+      color: var(--text-color) !important;
+    }
+    
+    /* Post content */
+    .post-content, .page-content {
+      color: var(--text-color) !important;
+    }
+    
+    /* Post header */
+    .post-header {
+      margin-bottom: 30px !important;
+    }
+    
+    .post-title {
+      color: var(--text-color) !important;
+      font-size: 42px !important;
+      letter-spacing: -1px !important;
+      line-height: 1 !important;
+    }
+    
+    /* Post list */
+    .post-list {
+      margin-left: 0 !important;
+      list-style: none !important;
+    }
+    
+    .post-list > li {
+      margin-bottom: 30px !important;
+    }
+    
+    .post-meta {
+      font-size: 14px !important;
+      color: var(--text-color) !important;
+      opacity: 0.7;
+    }
+    
+    .post-link {
+      display: block !important;
+      font-size: 24px !important;
+      color: var(--link-color) !important;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+      .dark-mode-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 6px 10px;
+      }
+      
+      .form-check-label {
+        font-size: 13px;
+      }
+      
+      .post-title {
+        font-size: 36px !important;
+      }
+    }
+  </style>
+  
+  <script>
+    (function() {
+      // Check if dark mode is enabled in localStorage
+      var darkThemeSelected = localStorage.getItem('darkSwitch') !== null && localStorage.getItem('darkSwitch') === 'dark';
+      
+      // Apply dark theme immediately if enabled
+      if (darkThemeSelected) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head> 
